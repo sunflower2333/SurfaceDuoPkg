@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat ./BootShim/BootShim.bin ./Build/SurfaceDuo1-AARCH64/DEBUG_CLANG38/FV/SM8150_EFI.fd ./ImageResources/dummykernel > ./ImageResources/Epsilon/bootpayload.bin
+cat ./BootShim/BootShim.bin ./Build/SurfaceDuo1-AARCH64/DEBUG_CLANG38/FV/SM8150_EFI.fd > ./ImageResources/Epsilon/bootpayload.bin
 
 python3 ./ImageResources/mkbootimg.py \
   --kernel ./ImageResources/Epsilon/bootpayload.bin \
@@ -12,10 +12,10 @@ python3 ./ImageResources/mkbootimg.py \
   --dtb ./ImageResources/Epsilon/dtb \
   --base 0x0 \
   --os_version 11.0.0 \
-  --os_patch_level 2022-08-01 \
+  --os_patch_level 2022-12-01 \
   --second_offset 0xf00000
 
-cat ./BootShim/BootShim.bin ./Build/SurfaceDuo1-AARCH64/DEBUG_CLANG38/FV/SM8150_EFI.fd ./ImageResources/Epsilon/kernel > ./ImageResources/Epsilon/bootpayload.bin
+cat ./ImageResources/Epsilon/patchedkernel ./Build/SurfaceDuo1-AARCH64/DEBUG_CLANG38/FV/SM8150_EFI.fd > ./ImageResources/Epsilon/bootpayload.bin
 
 python3 ./ImageResources/mkbootimg.py \
   --kernel ./ImageResources/Epsilon/bootpayload.bin \
@@ -27,10 +27,10 @@ python3 ./ImageResources/mkbootimg.py \
   --dtb ./ImageResources/Epsilon/dtb \
   --base 0x0 \
   --os_version 11.0.0 \
-  --os_patch_level 2022-08-01 \
+  --os_patch_level 2022-12-01 \
   --second_offset 0xf00000
 
-cat ./BootShim/BootShim.bin ./Build/SurfaceDuo2-AARCH64/DEBUG_CLANG38/FV/SM8350_EFI.fd ./ImageResources/dummykernel > ./ImageResources/Zeta/bootpayload.bin
+cat ./BootShim/BootShim.bin ./Build/SurfaceDuo2-AARCH64/DEBUG_CLANG38/FV/SM8350_EFI.fd > ./ImageResources/Zeta/bootpayload.bin
 
 python3 ./ImageResources/mkbootimg.py \
   --kernel ./ImageResources/Zeta/bootpayload.bin \
@@ -41,9 +41,9 @@ python3 ./ImageResources/mkbootimg.py \
   --cmdline "" \
   --base 0x0 \
   --os_version 11.0.0 \
-  --os_patch_level 2022-08-01
+  --os_patch_level 2022-12-01
 
-cat ./BootShim/BootShim.bin ./Build/SurfaceDuo2-AARCH64/DEBUG_CLANG38/FV/SM8350_EFI.fd ./ImageResources/Zeta/kernel > ./ImageResources/Zeta/bootpayload.bin
+cat ./ImageResources/Zeta/patchedkernel ./Build/SurfaceDuo2-AARCH64/DEBUG_CLANG38/FV/SM8350_EFI.fd > ./ImageResources/Zeta/bootpayload.bin
 
 python3 ./ImageResources/mkbootimg.py \
   --kernel ./ImageResources/Zeta/bootpayload.bin \
@@ -54,4 +54,4 @@ python3 ./ImageResources/mkbootimg.py \
   --cmdline "" \
   --base 0x0 \
   --os_version 11.0.0 \
-  --os_patch_level 2022-08-01
+  --os_patch_level 2022-12-01

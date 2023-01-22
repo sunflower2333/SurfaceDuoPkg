@@ -11,7 +11,7 @@
 
 [BuildOptions.common]
   *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -Wno-unaligned-access -D CLANG
-  *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -DUSE_MEMORY_FOR_SERIAL_OUTPUT=$(USE_MEMORY_FOR_SERIAL_OUTPUT) -DUSE_SCREEN_FOR_SERIAL_OUTPUT=$(USE_SCREEN_FOR_SERIAL_OUTPUT)
+  *_*_*_CC_FLAGS = -march=armv8.2-a+crypto+rcpc -DUSE_MEMORY_FOR_SERIAL_OUTPUT=$(USE_MEMORY_FOR_SERIAL_OUTPUT) -DUSE_SCREEN_FOR_SERIAL_OUTPUT=$(USE_SCREEN_FOR_SERIAL_OUTPUT) -DSECURE_BOOT_ENABLE=$(SECURE_BOOT_ENABLE)
   *_*_*_PP_FLAGS = -DICC_SGI1R=ICC_SGI1R_EL1
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]
@@ -41,8 +41,8 @@
 
 [PcdsFixedAtBuild.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"DuoWoA authors"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2212.12"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x0016040C
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2301.67"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x00171501
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"QCOM  "
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x324B44454D4F4351
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId|0x4D4F4351
@@ -69,7 +69,7 @@
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiACPIReclaimMemory|0
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiACPIMemoryNVS|0
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiReservedMemoryType|0
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesData|600
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesCode|400
   gEmbeddedTokenSpaceGuid.PcdMemoryTypeEfiBootServicesCode|1500
@@ -96,7 +96,7 @@
   gArmTokenSpaceGuid.PcdPciBusMin|0x0
   gArmTokenSpaceGuid.PcdPciBusMax|0xff
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxAuthVariableSize|0x2800
   gEfiSecurityPkgTokenSpaceGuid.PcdUserPhysicalPresence|TRUE
 !endif
@@ -115,8 +115,8 @@
   # 4042708A-0F2D-4823-AC60-0D77B3111889
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x8A, 0x70, 0x42, 0x40, 0x2D, 0x0F, 0x23, 0x48, 0xAC, 0x60, 0x0D, 0x77, 0xB3, 0x11, 0x18, 0x89 }
 
-  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1160C0C # 1.22.12.12
-  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x16040C # 12/4/2022
+  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1170143 # 1.23.01.67
+  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x171501 # 01/21/2023
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x2000
 
@@ -125,7 +125,7 @@
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
   ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
-!if $(USE_PHYSICAL_TIMER) == TRUE
+!if $(USE_PHYSICAL_TIMER) == 1
   ArmGenericTimerCounterLib|ArmPkg/Library/ArmGenericTimerPhyCounterLib/ArmGenericTimerPhyCounterLib.inf
 !else
   ArmGenericTimerCounterLib|ArmPkg/Library/ArmGenericTimerVirtCounterLib/ArmGenericTimerVirtCounterLib.inf
@@ -198,7 +198,7 @@
   VariablePolicyHelperLib|MdeModulePkg/Library/VariablePolicyHelperLib/VariablePolicyHelperLib.inf
   TimeBaseLib|EmbeddedPkg/Library/TimeBaseLib/TimeBaseLib.inf
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   RngLib|MdePkg/Library/BaseRngLibTimerLib/BaseRngLibTimerLib.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibCrypto.inf
@@ -312,7 +312,7 @@
   UefiHiiServicesLib|MdeModulePkg/Library/UefiHiiServicesLib/UefiHiiServicesLib.inf
   ExtractGuidedSectionLib|MdePkg/Library/DxeExtractGuidedSectionLib/DxeExtractGuidedSectionLib.inf
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
 !endif
 
@@ -327,7 +327,7 @@
   ReportStatusCodeLib|MdeModulePkg/Library/DxeReportStatusCodeLib/DxeReportStatusCodeLib.inf
   ExtractGuidedSectionLib|MdePkg/Library/DxeExtractGuidedSectionLib/DxeExtractGuidedSectionLib.inf
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
 !endif
 
@@ -341,7 +341,7 @@
   UefiScsiLib|MdePkg/Library/UefiScsiLib/UefiScsiLib.inf
   ExtractGuidedSectionLib|MdePkg/Library/DxeExtractGuidedSectionLib/DxeExtractGuidedSectionLib.inf
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
 !endif
 
@@ -360,7 +360,7 @@
 
   VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLibRuntimeDxe.inf
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
 !endif
 
@@ -425,12 +425,12 @@
   # Security Stub
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf {
     <LibraryClasses>
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
       NULL|SecurityPkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.inf
 !endif
   }
 
-!if $(SECURE_BOOT_ENABLE) == TRUE
+!if $(SECURE_BOOT_ENABLE) == 1
   SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
   SurfaceDuoFamilyPkg/Driver/SecureBootProvisioningDxe/SecureBootProvisioningDxe.inf
 !endif
