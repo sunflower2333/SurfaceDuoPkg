@@ -40,8 +40,8 @@
 
 [PcdsFixedAtBuild.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"DuoWoA authors"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2303.83"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x01230383
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2306.40"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x01230640
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"QCOM  "
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x324B44454D4F4351
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId|0x4D4F4351
@@ -114,8 +114,8 @@
   # 4042708A-0F2D-4823-AC60-0D77B3111889
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x8A, 0x70, 0x42, 0x40, 0x2D, 0x0F, 0x23, 0x48, 0xAC, 0x60, 0x0D, 0x77, 0xB3, 0x11, 0x18, 0x89 }
 
-  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1230383 # 1.23.03.83
-  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x20232603 # 03/26/2023
+  gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1230640 # 1.23.06.40
+  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x20231206 # 06/12/2023
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x2000
 
@@ -246,7 +246,7 @@
   #
   # Secure Boot dependencies
   #
-  AuthVariableLib|SecurityPkg/Library/AuthVariableLib/AuthVariableLib.inf
+  AuthVariableLib|SurfaceDuoFamilyPkg/Library/AuthVariableLib/AuthVariableLib.inf
   SecureBootVariableLib|SecurityPkg/Library/SecureBootVariableLib/SecureBootVariableLib.inf
   SecureBootVariableProvisionLib|SecurityPkg/Library/SecureBootVariableProvisionLib/SecureBootVariableProvisionLib.inf
   # re-use the UserPhysicalPresent() dummy implementation from the ovmf tree
@@ -363,6 +363,9 @@
 
   # ARM Architectural Libraries
   ArmGicArchLib|ArmPkg/Library/ArmGicArchLib/ArmGicArchLib.inf
+
+  MallocLib|SurfaceDuoFamilyPkg/Library/MallocLib/MallocLib.inf
+  LodePngLib|SurfaceDuoFamilyPkg/Library/LodePngLib/LodePngLib.inf
 
 [LibraryClasses.common.SEC]
   ArmGicArchLib|ArmPkg/Library/ArmGicArchSecLib/ArmGicArchSecLib.inf
